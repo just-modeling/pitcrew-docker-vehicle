@@ -1,5 +1,5 @@
 Thanks for contributing! Please see the
-__Contributor Guide__ section in [the documentation](https://jupyter-docker-stacks.readthedocs.io) for
+[Contributor Guide](https://jupyter-docker-stacks.readthedocs.io) in the documentation for
 information about how to contribute
 [package updates](http://jupyter-docker-stacks.readthedocs.io/en/latest/contributing/packages.html),
 [recipes](http://jupyter-docker-stacks.readthedocs.io/en/latest/contributing/recipes.html),

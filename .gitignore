@@ -62,9 +62,12 @@ target/
 # Mac OS X
 .DS_Store
 
+# Docker & Pycache
 dockerspawner
 dockerspawner.tar.gz
 *.orig
 .ipynb_checkpoints/
 .vscode/
 .pytest_cache/
+
+

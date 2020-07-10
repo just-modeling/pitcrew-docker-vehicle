@@ -1,7 +1,6 @@
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
 import os
-import logging
 
 import docker
 import pytest
@@ -10,8 +9,6 @@ import requests
 from requests.packages.urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
 
-
-LOGGER = logging.getLogger(__name__)
 
 @pytest.fixture(scope='session')
 def http_client():
@@ -75,10 +72,9 @@ class TrackedContainer(object):
         all_kwargs = {}
         all_kwargs.update(self.kwargs)
         all_kwargs.update(kwargs)
-        LOGGER.info(f"Running {self.image_name} with args {all_kwargs} ...")
         self.container = self.docker_client.containers.run(self.image_name, **all_kwargs)
         return self.container
-    
+
     def remove(self):
         """Kills and removes the tracked docker container."""
         if self.container:
