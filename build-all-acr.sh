@@ -3,18 +3,6 @@ az login
 ACR_NAME=novncacr
 az acr login -n $ACR_NAME
 
-# build jupyter-k8s-hub
-cd jupyter-k8s-hub
-docker build -t $ACR_NAME.azurecr.io/k8s-hub:latest .
-docker push $ACR_NAME.azurecr.io/k8s-hub:latest
-cd ..
-
-# build the novnc-desktop
-cd docker-ubuntu-vnc-desktop
-docker build -t $ACR_NAME.azurecr.io/novnc-notebook:latest .
-docker push $ACR_NAME.azurecr.io/novnc-notebook:latest
-cd ..
-
 # build the base-notebook
 cd base-notebook
 docker build -t $ACR_NAME.azurecr.io/base-notebook:latest .
