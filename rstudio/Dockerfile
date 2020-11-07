@@ -63,11 +63,11 @@ RUN ln -s /usr/lib/rstudio-server/bin/pandoc/pandoc /usr/local/bin \
     \n}' >> /usr/local/lib/R/etc/Rprofile.site \
   && echo "PATH=${PATH}" >> /usr/local/lib/R/etc/Renviron \
   ## Need to configure non-root user for RStudio
-  && useradd rstudio \
-  && echo "rstudio:rstudio" | chpasswd \
-	&& mkdir /home/rstudio \
-	&& chown rstudio:rstudio /home/rstudio \
-	&& addgroup rstudio staff \
+  && useradd jovyan \
+  && echo "jovyan:jovyan" | chpasswd \
+	&& mkdir /home/jovyan \
+	&& chown jovyan:jovyan /home/jovyan \
+	&& addgroup jovyan staff \
   ## Prevent rstudio from deciding to use /usr/bin/R if a user apt-get installs a package
   &&  echo 'rsession-which-r=/usr/local/bin/R' >> /etc/rstudio/rserver.conf \
   ## use more robust file locking to avoid errors when using shared volumes:
@@ -87,12 +87,12 @@ RUN ln -s /usr/lib/rstudio-server/bin/pandoc/pandoc /usr/local/bin \
   && echo '#!/bin/bash \
           \n rstudio-server stop' \
           > /etc/services.d/rstudio/finish \
-  && mkdir -p /home/rstudio/.rstudio/monitored/user-settings \
+  && mkdir -p /home/jovyan/.rstudio/monitored/user-settings \
   && echo 'alwaysSaveHistory="0" \
           \nloadRData="0" \
           \nsaveAction="0"' \
-          > /home/rstudio/.rstudio/monitored/user-settings/user-settings \
-  && chown -R rstudio:rstudio /home/rstudio/.rstudio
+          > /home/jovyan/.rstudio/monitored/user-settings/user-settings \
+  && chown -R jovyan:jovyan /home/jovyan/.rstudio
 
 COPY userconf.sh /etc/cont-init.d/userconf
 
@@ -104,6 +104,7 @@ COPY pam-helper.sh /usr/lib/rstudio-server/bin/pam-helper
 EXPOSE 8787
 
 ## automatically link a shared volume for kitematic users
-VOLUME /home/rstudio/kitematic
+ENV DISABLE_AUTH=true
+WORKDIR /home/jovyan
 
 CMD ["/init"]

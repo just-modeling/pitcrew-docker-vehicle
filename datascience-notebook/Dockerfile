@@ -87,4 +87,4 @@ RUN julia -e 'import Pkg; Pkg.update()' && \
 
 RUN mkdir -p $HOME/shared && \
     mkdir -p $HOME/work
-WORKDIR $HOME/shared
+WORKDIR $HOME
