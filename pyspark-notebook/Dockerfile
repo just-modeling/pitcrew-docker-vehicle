@@ -107,4 +107,10 @@ RUN pip install \
 
 COPY jupyter_notebook_config.py /etc/jupyter/
 
+USER root
+RUN mkdir -p /opt/spark/conf
+COPY spark-defaults.conf /opt/spark/conf/spark-defaults.conf
+
+USER $NB_UID
+
 EXPOSE 9998

@@ -20,16 +20,14 @@ docker build -t $ACR_NAME.azurecr.io/datascience-notebook:latest --build-arg BAS
 docker push $ACR_NAME.azurecr.io/datascience-notebook:latest
 cd ..
 
-# cd tensorflow-notebook
-# docker build -t $ACR_NAME.azurecr.io/tensorflow-notebook:latest --build-arg BASE_CONTAINER=$ACR_NAME.azurecr.io/scipy-notebook:latest .
-# docker push $ACR_NAME.azurecr.io/tensorflow-notebook:latest
-# cd ..
+cd tensorflow-notebook
+docker build -t $ACR_NAME.azurecr.io/tensorflow-notebook:latest .
+docker push $ACR_NAME.azurecr.io/tensorflow-notebook:latest
+cd ..
 
 cd pyspark-notebook
 # build spark-py image
 docker build \
-	--build-arg VCS_REF=$(git rev-parse --short HEAD) \
-    --build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
     --build-arg VERSION=0.1 \
 	-t $ACR_NAME.azurecr.io/spark-py:v2.4.5 \
 	-f spark-2.4.5-bin-hadoop3.2/Dockerfile .

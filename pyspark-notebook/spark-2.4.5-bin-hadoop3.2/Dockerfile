@@ -2,8 +2,6 @@ ARG SPARK_IMAGE=gcr.io/spark-operator/spark:v2.4.5
 FROM ${SPARK_IMAGE}
 
 ARG VERSION
-ARG VCS_REF
-ARG BUILD_DATE
 
 ENV SCALA_VERSION 2.11
 ENV SPARK_VERSION 2.4.5
@@ -15,11 +13,9 @@ ENV ARCHIVE_URL http://archive.apache.org/dist
 
 # Adhere to opencontainers image spec https://github.com/opencontainers/image-spec/blob/master/annotations.md
 LABEL org.opencontainers.image.title="graphiq-spark-runner" \
-      org.opencontainers.image.created=${BUILD_DATE} \
       org.opencontainers.image.description="base image for Scala  Spark jobs that need to run on kubernetes via the spark-operator" \
       org.opencontainers.image.source="https://github.com/TomLous/medium-spark-k8s" \
-      org.opencontainers.image.documentation="https://github.com/TomLous/medium-spark-k8s/blob/master/README.md" \
-      org.opencontainers.image.revison=${VCS_REF} \
+      org.opencontainers.image.documentation="https://github.com/TomLous/medium-spark-k8s/blob/master/README.md" \ v
       org.opencontainers.image.vendor="GraphIQ" \
       org.opencontainers.image.version=${VERSION} \
       org.opencontainers.image.authors="Tom Lous <tomlous@gmail.com>" \
@@ -99,6 +95,8 @@ RUN pip3 install \
 	junit-xml \
 	adal
 
-WORKDIR /opt/spark/work-dir
+RUN mkdir -p /home/jovyan
+
+WORKDIR /home/jovyan
 
 ENTRYPOINT ["/opt/entrypoint.sh"]
