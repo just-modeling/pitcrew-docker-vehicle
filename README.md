@@ -3,17 +3,6 @@
 [![DockerHub badge](https://images.microbadger.com/badges/version/jupyter/base-notebook.svg)](https://microbadger.com/images/jupyter/base-notebook "Recent tag/version of jupyter/base-notebook")
 [![Binder badget](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jupyter/docker-stacks/master?filepath=README.ipynb "Launch a jupyter/base-notebook container on mybinder.org")
 
-# (KSMC Only)
-When close the repository, also recursively clone the submodules
-
-    git clone --recurse-submodules https://github.com/ksmc/ere-k8s-hub.git
-
-Checkout to NOVNC branch if building docker images for NOVNC prototype
-
-    git checkout novnc
-
-Run blocks from top to bottom within setup-all-acr.sh or setup-all-ecr.sh for Azure CR and Elastic CR respectively.
-
 # Jupyter Docker Stacks
 
 Jupyter Docker Stacks are a set of ready-to-run [Docker images](https://hub.docker.com/u/jupyter) containing Jupyter applications and interactive computing tools.
